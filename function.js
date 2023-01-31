@@ -29,6 +29,15 @@ let ataqueEnemigo
 let vidaJugador = 3
 let vidaEnemigo = 3
 
+class Kokemon {
+    constructor(nombre, img, vida) {
+        this.nombre = nombre;
+        this.img = img;
+        this.vida = vida;
+    }
+}
+
+
 function iniciarJuego() {
     sectionAtaque.style.display = "none"
     btnKokemon.addEventListener("click", seleccionarKokemonJugador);

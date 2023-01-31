@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kokemon! 🔥💧🌱</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500&display=swap');
+      </style>
+</head>
+<body>
+    <section id="seleccionar-kokemon">
+     <h1 class="titulo">🌱💧🔥 KOKEMON 🔥💧🌱</h1>
+     <br/>
+     <h2 class="subtitulo">Selecciona tu Kokemon:</h2>
+     <div class="tarjetas">
+        <input type="radio" name="kokemon" id="poku"/>
+        <label class="tarjeta-kokemon" for="poku">
+            <h3>Poku</h3> 
+            <p>Tipo: <span class="fuego">Fuego</span></p>
+            <img src="./assets/poku.png" alt="kokemon poku tipo fuego">   
+        </label>
+
+        <input type="radio" name="kokemon" id="nagulo"/>
+        <label class="tarjeta-kokemon" for="nagulo">
+            <h3>Nagulo</h3> 
+            <p>Tipo: <span class="planta">Planta</span></p> 
+            <img src="./assets/nagulo.jpg" alt="kokemon nagulo tipo planta">
+        </label>
+
+        <input type="radio" name="kokemon" id="ichite"/> 
+        <label class="tarjeta-kokemon" for="ichite">
+            <h3>Ichite</h3> 
+            <p>Tipo: <span class="agua">Agua</span></p>
+            <img src="./assets/ichite.jpg" alt="kokemon ichite tipo agua"> 
+        </label>
+
+        <input type="radio" name="kokemon" id="manila"/> 
+        <label class="tarjeta-kokemon" for="manila">
+            <h3>Manila</h3> 
+            <p>Tipo: <span class="agua">Agua</span> y <span class="fuego">Fuego</span></p> 
+            <img src="./assets/manila.jpg" alt="kokemon manila tipo agua y fuego">
+        </label>
+
+        <input type="radio" name="kokemon" id="zarubo"/> 
+        <label class="tarjeta-kokemon" for="zarubo">
+            <h3>Zarubo</h3> 
+            <p>Tipo: <span class="fuego">Fuego</span> y <span class="planta">Planta</span></p> 
+            <img src="./assets/zarubo.jpg" alt="kokemon zarubo tipo fuego y plata">
+        </label>
+
+        <input type="radio" name="kokemon" id="v2"/> 
+        <label class="tarjeta-kokemon" for="v2">
+            <h3>V2</h3> 
+            <p>Tipo: <span class="agua">Agua</span> y <span class="planta">Planta</span></p> 
+            <img src="./assets/V2.jpg" alt="kokemon v2 tipo agua y planta">
+        </label>
+     </div>
+     <button id="btn-kokemon">Seleccionar</button>
+    
+    </section>
+    <section id="seleccionar-ataque">
+     <h1 class="titulo">🌱💧🔥 KOKEMON 🔥💧🌱</h1>
+     <h2 class="subtitulo">Selecciona tu ataque</h2>
+     <div class="tarjetas-ataque">
+        <button id="btn-fuego" class="ataque">Fuego 🔥</button>
+        <button id="btn-agua" class="ataque">Agua 💧</button>
+        <button id="btn-planta" class="ataque">Planta 🌱</button>
+     </div>
+
+     <div>
+
+        <div id="msj">
+            <p id="resultado">¡Aquí vas a ver el resultado de tus ataques!</p>
+
+            <section>
+                <button id="btn-reinicio">Volver a jugar!</button>
+            </section>
+        </div>
+
+     </div>
+
+     <div class="ataques">
+        <div>
+            <p id="kokemon-jugador"></p>
+            <p id="vida-jugador"></p>
+            <div id="ataque-jugador"></div>
+        </div>
+        <div>
+            <p id="kokemon-enemigo"></p>
+            <p id="vida-enemigo"></p>
+            <div id="ataque-enemigo"></div>
+        </div>
+     </div>
+    </section>
+  <script defer src="./function.js"></script>
+</body>
+</html>

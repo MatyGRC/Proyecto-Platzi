@@ -134,22 +134,22 @@ function seleccionarKokemonJugador() {
 
         if (inputPoku.checked) {
         alert('Seleccionaste a Poku!')
-        spanKokemon.innerHTML = "Poku";
+        spanKokemon.innerHTML = inputPoku.id;
         } else if (inputNagulo.checked) {
         alert('Seleccionaste a Nagulo!')
-        spanKokemon.innerHTML = "Nagulo";
+        spanKokemon.innerHTML = inputNagulo.id;
         } else if (inputIchite.checked) {
         alert('Seleccionaste a Ichite!')
-        spanKokemon.innerHTML = "Ichite";
+        spanKokemon.innerHTML = inputIchite.id;
         } else if (inputManila.checked) {
         alert('Seleccionaste a Manila!')
-        spanKokemon.innerHTML = "Manila";
+        spanKokemon.innerHTML = inputManila.id;
         } else if (inputZarubo.checked) {
         alert('Seleccionaste a Zarubo!')
-        spanKokemon.innerHTML = "Zarubo";
+        spanKokemon.innerHTML = inputZarubo.id;
         } else if (inputV2.checked) {
         alert('Seleccionaste a V2!')
-        spanKokemon.innerHTML = "V2";
+        spanKokemon.innerHTML = inputV2.id;
         }
      else {
             alert("Selecciona una mascota!");

@@ -23,10 +23,12 @@ const spanVidaEnemigo = document.getElementById("vida-enemigo");
 const sectionMensajes = document.getElementById('resultado')
 const ataquesDelJugador = document.getElementById('ataque-jugador')
 const ataquesDelEnemigo = document.getElementById('ataque-enemigo')
+const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
 
 let kokemones = []
 let ataqueJugador
 let ataqueEnemigo
+let opcionDeKokemones
 let vidaJugador = 3
 let vidaEnemigo = 3
 
@@ -40,8 +42,8 @@ class Kokemon {
 }
 
 let poku = new Kokemon("Poku", "./assets/poku.png", 3)
-let nagulo = new Kokemon("Nagulo", "./assets/nagulo.png", 3)
-let ichite = new Kokemon("Ichite", "./assets/ichite.png", 3)
+let nagulo = new Kokemon("Nagulo", "./assets/nagulo.jpg", 3)
+let ichite = new Kokemon("Ichite", "./assets/ichite.jpg", 3)
 let manila = new Kokemon("Manila", "./assets/manila.jpg", 3)
 let zarubo = new Kokemon("Zarubo", "./assets/zarubo.jpg", 3)
 let v2 = new Kokemon("V2", "./assets/V2.jpg", 3)
@@ -98,6 +100,18 @@ kokemones.push(poku, nagulo, ichite, manila, zarubo, v2)
 
 function iniciarJuego() {
     sectionAtaque.style.display = "none"
+    kokemones.forEach((kokemon) => {
+        opcionDeKokemones = `
+        <input type="radio" name="kokemon" id=${kokemon.nombre}/>
+        <label class="tarjeta-kokemon" for=${kokemon.nombre}>
+            <h3>${kokemon.nombre}</h3> 
+            <p>Tipo: <span class="fuego">Fuego</span></p>
+            <img src=${kokemon.img} alt="kokemon ${kokemon.nombre} tipo fuego">   
+        </label>
+        `
+    contenedorTarjetas.innerHTML += opcionDeKokemones
+
+    })
     btnKokemon.addEventListener("click", seleccionarKokemonJugador);
     botonFuego.addEventListener("click", ataqueFuego);
     botonAgua.addEventListener("click", ataqueAgua);

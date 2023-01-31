@@ -24,6 +24,7 @@ const sectionMensajes = document.getElementById('resultado')
 const ataquesDelJugador = document.getElementById('ataque-jugador')
 const ataquesDelEnemigo = document.getElementById('ataque-enemigo')
 
+let kokemones = []
 let ataqueJugador
 let ataqueEnemigo
 let vidaJugador = 3
@@ -34,9 +35,66 @@ class Kokemon {
         this.nombre = nombre;
         this.img = img;
         this.vida = vida;
+        this.ataques = []
     }
 }
 
+let poku = new Kokemon("Poku", "./assets/poku.png", 3)
+let nagulo = new Kokemon("Nagulo", "./assets/nagulo.png", 3)
+let ichite = new Kokemon("Ichite", "./assets/ichite.png", 3)
+let manila = new Kokemon("Manila", "./assets/manila.jpg", 3)
+let zarubo = new Kokemon("Zarubo", "./assets/zarubo.jpg", 3)
+let v2 = new Kokemon("V2", "./assets/V2.jpg", 3)
+
+poku.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🔥", id: "btn-fuego"},
+) 
+
+nagulo.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "🌱", id: "btn-planta"},
+)
+
+ichite.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "💧", id: "btn-agua"},  
+)
+
+manila.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+)
+
+zarubo.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "🔥", id: "btn-fuego"},
+)
+
+v2.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+)
+
+kokemones.push(poku, nagulo, ichite, manila, zarubo, v2)
 
 function iniciarJuego() {
     sectionAtaque.style.display = "none"

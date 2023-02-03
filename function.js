@@ -1,8 +1,5 @@
 const sectionAtaque = document.getElementById("seleccionar-ataque")
 const btnKokemon = document.getElementById("btn-kokemon")
-const botonFuego = document.getElementById("btn-fuego")
-const botonAgua = document.getElementById("btn-agua")
-const botonPlanta = document.getElementById("btn-planta")
 const botonReiniciar = document.getElementById("btn-reinicio")
 
 const spanKokemon = document.getElementById("kokemon-jugador");
@@ -17,6 +14,7 @@ const sectionMensajes = document.getElementById('resultado')
 const ataquesDelJugador = document.getElementById('ataque-jugador')
 const ataquesDelEnemigo = document.getElementById('ataque-enemigo')
 const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
+const contenedorAtaques = document.getElementById('contenedor-ataques')
 
 let kokemones = []
 let ataqueJugador
@@ -28,6 +26,11 @@ let inputIchite
 let inputManila
 let inputZarubo
 let inputV2
+let kokemonJugador
+let ataquesKokemon
+let botonFuego = document.getElementById("btn-fuego")
+let botonAgua = document.getElementById("btn-agua")
+let botonPlanta = document.getElementById("btn-planta")
 let vidaJugador = 3
 let vidaEnemigo = 3
 
@@ -119,9 +122,6 @@ function iniciarJuego() {
     })
 
     btnKokemon.addEventListener("click", seleccionarKokemonJugador);
-    botonFuego.addEventListener("click", ataqueFuego);
-    botonAgua.addEventListener("click", ataqueAgua);
-    botonPlanta.addEventListener("click", ataquePlanta);
     botonReiniciar.addEventListener("click", reiniciarJuego);
     botonReiniciar.style.display = "none"
 }
@@ -135,28 +135,60 @@ function seleccionarKokemonJugador() {
         if (inputPoku.checked) {
         alert('Seleccionaste a Poku!')
         spanKokemon.innerHTML = inputPoku.id;
+        kokemonJugador = inputPoku.id;
         } else if (inputNagulo.checked) {
         alert('Seleccionaste a Nagulo!')
         spanKokemon.innerHTML = inputNagulo.id;
+        kokemonJugador = inputNagulo.id;
         } else if (inputIchite.checked) {
         alert('Seleccionaste a Ichite!')
         spanKokemon.innerHTML = inputIchite.id;
+        kokemonJugador = inputIchite.id
         } else if (inputManila.checked) {
         alert('Seleccionaste a Manila!')
         spanKokemon.innerHTML = inputManila.id;
+        kokemonJugador = inputManila.id
         } else if (inputZarubo.checked) {
         alert('Seleccionaste a Zarubo!')
         spanKokemon.innerHTML = inputZarubo.id;
+        kokemonJugador = inputZarubo.id
         } else if (inputV2.checked) {
         alert('Seleccionaste a V2!')
         spanKokemon.innerHTML = inputV2.id;
+        kokemonJugador = inputV2.id;
         }
      else {
             alert("Selecciona una mascota!");
     }
 }
-
+    extraerAtaques(kokemonJugador)
     seleccionarKokemonEnemigo()
+}
+
+function extraerAtaques(kokemonJugador) {
+    let ataques
+    for (let i = 0; i < kokemones.length; i++) {
+        if (kokemonJugador === kokemones[i].nombre) {
+
+        }
+        ataques = kokemones[i].ataques;
+        mostrarAtaques(ataques);
+    }
+}
+
+function mostrarAtaques(ataques) {
+    ataques.forEach((ataque) => {
+       ataquesKokemon = `
+       <button id=${ataque.id} class="ataque">${ataque.nombre}</button>
+       ` 
+       contenedorAtaques.innerHTML += ataquesKokemon 
+    });
+    botonFuego = document.getElementById("btn-fuego")
+    botonAgua = document.getElementById("btn-agua")
+    botonPlanta = document.getElementById("btn-planta")
+    botonFuego.addEventListener("click", ataqueFuego);
+    botonAgua.addEventListener("click", ataqueAgua);
+    botonPlanta.addEventListener("click", ataquePlanta);
 }
 
 function seleccionarKokemonEnemigo() {

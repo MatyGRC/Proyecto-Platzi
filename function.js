@@ -160,9 +160,10 @@ function seleccionarKokemonJugador() {
 }
 
 function seleccionarKokemonEnemigo() {
-    let kokemonAleatorio = aleatorio(1, 6)
+    let kokemonAleatorio = aleatorio(0, kokemones.length - 1);
+    spanKokemonEnemigo.innerHTML = kokemones[kokemonAleatorio].name;
 
-    if (kokemonAleatorio == 1) {
+/*     if (kokemonAleatorio == 1) {
         spanKokemonEnemigo.innerHTML = "Poku";
     } else if (kokemonAleatorio == 2) {
         spanKokemonEnemigo.innerHTML = "Nagulo";
@@ -174,7 +175,7 @@ function seleccionarKokemonEnemigo() {
         spanKokemonEnemigo.innerHTML = "Zarubo";
     } else {
         spanKokemonEnemigo.innerHTML = "V2";
-    }
+    } */
 }
 
 function aleatorio(min, max) {

@@ -170,18 +170,6 @@ body {
     justify-items: center;
 }    
 
-span.agua {
-    color: #5BC0F8;
-}
-
-span.fuego {
-    color: red;
-}
-
-span.planta {
-    color: green;
-}
-
 h3 {
     display: flex;
     justify-content: center;

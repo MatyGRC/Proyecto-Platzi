@@ -113,7 +113,6 @@ function iniciarJuego() {
         <input type="radio" name="kokemon" id=${kokemon.nombre} />
         <label class="tarjeta-kokemon" for=${kokemon.nombre}>
             <h3>${kokemon.nombre}</h3> 
-            <p>Tipo: <span class="fuego">Fuego</span></p>
             <img src=${kokemon.img} alt="kokemon ${kokemon.nombre} tipo fuego">   
         </label>
         `
@@ -205,12 +204,15 @@ function sequenciaAtaque() {
             if (e.target.textContent === "🔥") {
                 ataqueJugador.push("FUEGO");
                 boton.style.background = "#A7727D";
+                boton.disabled = true
             } else if (e.target.textContent === "💧") {
                 ataqueJugador.push("AGUA");
                 boton.style.background = "#A7727D";
+                boton.disabled = true
             } else {
-                ataqueJugador.push("TIERRA");
+                ataqueJugador.push("PLANTA");
                 boton.style.background = "#A7727D";
+                boton.disabled = true
             }
             ataqueAleatorioEnemigo()
         })
@@ -332,9 +334,7 @@ function crearMsj(resultado) {
 
 function crearMsjFinal(resultadoFinal) {
     sectionMensajes.innerHTML = resultadoFinal
-    botonFuego.disabled = true
-    botonAgua.disabled = true
-    botonPlanta.disabled = true
+
     botonReiniciar.style.display = "block"
 }
 
@@ -343,3 +343,4 @@ function reiniciarJuego() {
 }
 
 window.addEventListener("load", iniciarJuego)
+

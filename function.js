@@ -33,6 +33,10 @@ let botonFuego
 let botonAgua
 let botonPlanta
 let botones = []
+let iAtaqueJugador
+let iAtaqueEnemigo
+let victoriasJugador = 0
+let victoriasEnemigo = 0
 let vidaJugador = 3
 let vidaEnemigo = 3
 
@@ -268,31 +272,50 @@ function ataqueAleatorioEnemigo() {
 }
 
 function iniciarCombate() {
-    
+    if (ataqueJugador.length === 5) {
+        combate()
+    }
+}
+
+function iAmbos(jugador, enemigo) {
+    iAtaqueJugador = ataqueJugador[jugador]
+    iAtaqueEnemigo = ataqueEnemigo[enemigo]
 }
 
 function combate() {
-    if (ataqueJugador == ataqueEnemigo) {
+
+    for (let i = 0; i < ataqueJugador.length; i++) {    
+      if (ataqueJugador[i] == ataqueEnemigo[i]) {
+        iAmbos(i, i)
         crearMsj("EMPATE");
-    } else if (ataqueJugador == "Agua" && ataqueEnemigo == "Fuego" || ataqueJugador == "Fuego" && ataqueEnemigo == "Planta" || ataqueJugador == "Planta" && ataqueEnemigo == "Agua") {
-        crearMsj("GANASTE");
-        vidaEnemigo -= 1;
-        spanVidaEnemigo.innerHTML = vidaEnemigo;
-        
-    }  else {
-        crearMsj("PERDISTE")
-        vidaJugador -= 1;
-        spanVidaJugador.innerHTML = vidaJugador;
+        } else if (ataqueJugador[i] == "AGUA" && ataqueEnemigo[i] == "FUEGO" || ataqueJugador[i] == "FUEGO" && ataqueEnemigo[i] == "PLANTA" || ataqueJugador[i] == "PLANTA" && ataqueEnemigo[i] == "AGUA") {
+            iAmbos(i, i)
+            crearMsj("GANASTE");
+            victoriasJugador ++
+            spanVidaJugador.innerHTML = victoriasJugador
+            /* vidaEnemigo -= 1;
+            spanVidaEnemigo.innerHTML = vidaEnemigo; */
+            
+        }  else {
+            iAmbos(i, i)
+            crearMsj("PERDISTE")
+            victoriasEnemigo ++
+            spanVidaEnemigo.innerHTML = victoriasEnemigo
+           /*  vidaJugador -= 1;
+            spanVidaJugador.innerHTML = vidaJugador; */
+        }
+        verVictorias()
     }
-    vidasRestantes()
 }
 
-function vidasRestantes() {
-    if (vidaEnemigo == 0) {
-        crearMsjFinal("GANASTE LA PARTIDA");
-    } else if (vidaJugador == 0) {
+function verVictorias() {
+    if (victoriasJugador == victoriasEnemigo) {
+        crearMsjFinal("EMPATE");
+    } else if (victoriasJugador > victoriasEnemigo) {
+        crearMsjFinal("GANASTE LA PARTIDA")
+ }    else {
         crearMsjFinal("PERDISTE LA PARTIDA")
- } 
+ }
 }
 
 function crearMsj(resultado) {
@@ -300,8 +323,8 @@ function crearMsj(resultado) {
     let nuevoAtaqueDelEnemigo = document.createElement('p')
 
     sectionMensajes.innerHTML = resultado
-    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+    nuevoAtaqueDelJugador.innerHTML = iAtaqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = iAtaqueEnemigo
 
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)

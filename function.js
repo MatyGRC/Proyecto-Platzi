@@ -17,8 +17,8 @@ const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
 const contenedorAtaques = document.getElementById('contenedor-ataques')
 
 let kokemones = []
-let ataqueJugador
-let ataqueEnemigo
+let ataqueJugador = []
+let ataqueEnemigo = []
 let opcionDeKokemones
 let inputPoku
 let inputNagulo
@@ -28,11 +28,11 @@ let inputZarubo
 let inputV2
 let kokemonJugador
 let ataquesKokemon
+let ataquesKokemonEnemigo
 let botonFuego
 let botonAgua
 let botonPlanta
 let botones = []
-let ataquesJugador = []
 let vidaJugador = 3
 let vidaEnemigo = 3
 
@@ -188,7 +188,7 @@ function mostrarAtaques(ataques) {
     botonAgua = document.getElementById("btn-agua")
     botonPlanta = document.getElementById("btn-planta")
 
-    botones = document.querySelectorAll("BAtaque")
+    botones = document.querySelectorAll(".BAtaque")
 
 /*     botonFuego.addEventListener("click", ataqueFuego);
     botonAgua.addEventListener("click", ataqueAgua);
@@ -199,15 +199,16 @@ function sequenciaAtaque() {
     botones.forEach((boton) => {
         boton.addEventListener("click", (e) => {
             if (e.target.textContent === "🔥") {
-                ataquesJugador.push("FUEGO");
-                boton.style.background = "transparent";
+                ataqueJugador.push("FUEGO");
+                boton.style.background = "#A7727D";
             } else if (e.target.textContent === "💧") {
-                ataquesJugador.push("AGUA");
-                boton.style.background = "transparent";
+                ataqueJugador.push("AGUA");
+                boton.style.background = "#A7727D";
             } else {
-                ataquesJugador.push("TIERRA");
-                boton.style.background = "transparent";
+                ataqueJugador.push("TIERRA");
+                boton.style.background = "#A7727D";
             }
+            ataqueAleatorioEnemigo()
         })
     })
 }
@@ -215,7 +216,7 @@ function sequenciaAtaque() {
 function seleccionarKokemonEnemigo() {
     let kokemonAleatorio = aleatorio(0, kokemones.length - 1);
     spanKokemonEnemigo.innerHTML = kokemones[kokemonAleatorio].nombre;
-
+    ataquesKokemonEnemigo = kokemones[kokemonAleatorio].ataques
 /*     if (kokemonAleatorio == 1) {
         spanKokemonEnemigo.innerHTML = "Poku";
     } else if (kokemonAleatorio == 2) {
@@ -253,16 +254,21 @@ function ataquePlanta() {
 } */
 
 function ataqueAleatorioEnemigo() {
-    let ataqueAleatorio = aleatorio(1, 3);
 
-    if (ataqueAleatorio == 1) {
-        ataqueEnemigo = "Agua";
-    } else if (ataqueAleatorio == 2) {
-        ataqueEnemigo = "Fuego";
-    } else if (ataqueAleatorio == 3){
-        ataqueEnemigo = "Planta";
+    let ataqueAleatorio = aleatorio(0, ataquesKokemonEnemigo.length - 1);
+
+    if (ataqueAleatorio == 1 || ataqueAleatorio == 0) {
+        ataqueEnemigo.push("AGUA")
+    } else if (ataqueAleatorio == 2 || ataqueAleatorio == 4) {
+        ataqueEnemigo.push("FUEGO");
+    } else {
+        ataqueEnemigo.push("PLANTA");
     }
-    combate()
+    iniciarCombate()
+}
+
+function iniciarCombate() {
+    
 }
 
 function combate() {

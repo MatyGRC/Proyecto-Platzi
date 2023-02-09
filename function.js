@@ -16,6 +16,9 @@ const ataquesDelEnemigo = document.getElementById('ataque-enemigo')
 const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
 const contenedorAtaques = document.getElementById('contenedor-ataques')
 
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
+
 let kokemones = []
 let ataqueJugador = []
 let ataqueEnemigo = []
@@ -39,6 +42,7 @@ let victoriasJugador = 0
 let victoriasEnemigo = 0
 let vidaJugador = 3
 let vidaEnemigo = 3
+let lienzo = mapa.getContext("2d")
 
 class Kokemon {
     constructor(nombre, img, vida) {
@@ -46,6 +50,12 @@ class Kokemon {
         this.img = img;
         this.vida = vida;
         this.ataques = []
+        this.x = 20;
+        this.y = 30;
+        this.ancho = 80;
+        this.alto = 80;
+        this.mapaFoto = new Image();
+        this.mapaFoto.src = img;
     }
 }
 
@@ -108,6 +118,7 @@ kokemones.push(poku, nagulo, ichite, manila, zarubo, v2)
 
 function iniciarJuego() {
     sectionAtaque.style.display = "none"
+    sectionVerMapa.style.display = "none"
     kokemones.forEach((kokemon) => {
         opcionDeKokemones = `
         <input type="radio" name="kokemon" id=${kokemon.nombre} />
@@ -135,7 +146,9 @@ function seleccionarKokemonJugador() {
     if (inputPoku.checked || inputNagulo.checked || inputIchite.checked || inputManila.checked || inputZarubo.checked || inputV2.checked) {
 
         sectionSeleccionJugador.style.display = "none"
-        sectionAtaque.style.display = "flex"
+/*         sectionAtaque.style.display = "flex" */
+        sectionVerMapa.style.display = "flex"
+        pintarPersonaje()
 
         if (inputPoku.checked) {
         alert('Seleccionaste a Poku!')
@@ -340,6 +353,22 @@ function crearMsjFinal(resultadoFinal) {
 
 function reiniciarJuego() {
     location.reload()
+}
+
+function pintarPersonaje() {
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        poku.mapaFoto,
+        poku.x,
+        poku.y,
+        poku.ancho,
+        poku.alto
+    )
+}
+
+function moverKokemon() {
+    poku.x = poku.x + 5
+    pintarPersonaje()
 }
 
 window.addEventListener("load", iniciarJuego)

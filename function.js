@@ -43,6 +43,7 @@ let victoriasEnemigo = 0
 let vidaJugador = 3
 let vidaEnemigo = 3
 let lienzo = mapa.getContext("2d")
+let intervalo
 
 class Kokemon {
     constructor(nombre, img, vida) {
@@ -56,6 +57,8 @@ class Kokemon {
         this.alto = 80;
         this.mapaFoto = new Image();
         this.mapaFoto.src = img;
+        this.velocidadX = 0;
+        this.velocidadY = 0
     }
 }
 
@@ -148,6 +151,7 @@ function seleccionarKokemonJugador() {
         sectionSeleccionJugador.style.display = "none"
 /*         sectionAtaque.style.display = "flex" */
         sectionVerMapa.style.display = "flex"
+        intervalo = setInterval(pintarPersonaje, 50)
         pintarPersonaje()
 
         if (inputPoku.checked) {
@@ -356,6 +360,8 @@ function reiniciarJuego() {
 }
 
 function pintarPersonaje() {
+    poku.x = poku.x + poku.velocidadX
+    poku.y = poku.y + poku.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
         poku.mapaFoto,
@@ -366,9 +372,25 @@ function pintarPersonaje() {
     )
 }
 
-function moverKokemon() {
-    poku.x = poku.x + 5
-    pintarPersonaje()
+function moverDerecha() {
+    poku.velocidadX = 5
+}
+
+function moverIzquierda() {
+    poku.velocidadX = -5
+}
+
+function moverAbajo() {
+    poku.velocidadY = 5
+}
+
+function moverArriba() {
+    poku.velocidadY = -5
+}
+
+function detenerMovimiento() {
+    poku.velocidadX = 0
+    poku.velocidadY = 0
 }
 
 window.addEventListener("load", iniciarJuego)

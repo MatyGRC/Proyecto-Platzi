@@ -81,14 +81,22 @@ let manila = new Kokemon("Manila", "./assets/manila.jpg", 3, "./assets/manila.jp
 let zarubo = new Kokemon("Zarubo", "./assets/zarubo.jpg", 3, "./assets/zarubo.jpg")
 let v2 = new Kokemon("V2", "./assets/V2.jpg", 3, "./assets/V2.jpg")
 
-let pokuEnemigo = new Kokemon("Poku", "./assets/poku.png", 3, "./assets/poku.png", 90, 200)
+let pokuEnemigo = new Kokemon("Poku", "./assets/poku.png", 3, "./assets/poku.png", 90, 190)
 let naguloEnemigo = new Kokemon("Nagulo", "./assets/nagulo.jpg", 3, "./assets/nagulo.jpg", 150, 80 )
-let ichiteEnemigo = new Kokemon("Ichite", "./assets/ichite.jpg", 3, "./assets/ichite.jpg", 40, 280)
+let ichiteEnemigo = new Kokemon("Ichite", "./assets/ichite.jpg", 3, "./assets/ichite.jpg", 260, 120)
 let manilaEnemigo = new Kokemon("Manila", "./assets/manila.jpg", 3, "./assets/manila.jpg", 250, 20)
 let zaruboEnemigo = new Kokemon("Zarubo", "./assets/zarubo.jpg", 3, "./assets/zarubo.jpg", 30, 70)
 let v2Enemigo = new Kokemon("V2", "./assets/V2.jpg", 3, "./assets/V2.jpg", 200, 200)
 
 poku.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🔥", id: "btn-fuego"},
+)
+
+pokuEnemigo.ataques.push(
     { nombre: "🌱", id: "btn-planta"},
     { nombre: "💧", id: "btn-agua"},
     { nombre: "🔥", id: "btn-fuego"},
@@ -104,7 +112,23 @@ nagulo.ataques.push(
     { nombre: "🌱", id: "btn-planta"},
 )
 
+naguloEnemigo.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "🌱", id: "btn-planta"},
+)
+
 ichite.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "💧", id: "btn-agua"},  
+)
+
+ichiteEnemigo.ataques.push(
     { nombre: "🌱", id: "btn-planta"},
     { nombre: "💧", id: "btn-agua"},
     { nombre: "🔥", id: "btn-fuego"},
@@ -120,6 +144,14 @@ manila.ataques.push(
     { nombre: "🔥", id: "btn-fuego"},
 )
 
+manilaEnemigo.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+)
+
 zarubo.ataques.push(
     { nombre: "🌱", id: "btn-planta"},
     { nombre: "💧", id: "btn-agua"},
@@ -128,7 +160,23 @@ zarubo.ataques.push(
     { nombre: "🔥", id: "btn-fuego"},
 )
 
+zaruboEnemigo.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "🔥", id: "btn-fuego"},
+)
+
 v2.ataques.push(
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+    { nombre: "🔥", id: "btn-fuego"},
+    { nombre: "🌱", id: "btn-planta"},
+    { nombre: "💧", id: "btn-agua"},
+)
+
+v2Enemigo.ataques.push(
     { nombre: "🌱", id: "btn-planta"},
     { nombre: "💧", id: "btn-agua"},
     { nombre: "🔥", id: "btn-fuego"},
@@ -254,10 +302,9 @@ function sequenciaAtaque() {
     })
 }
 
-function seleccionarKokemonEnemigo() {
-    let kokemonAleatorio = aleatorio(0, kokemones.length - 1);
-    spanKokemonEnemigo.innerHTML = kokemones[kokemonAleatorio].nombre;
-    ataquesKokemonEnemigo = kokemones[kokemonAleatorio].ataques
+function seleccionarKokemonEnemigo(enemigo) {
+    spanKokemonEnemigo.innerHTML = enemigo.nombre;
+    ataquesKokemonEnemigo = enemigo.ataques
 /*     if (kokemonAleatorio == 1) {
         spanKokemonEnemigo.innerHTML = "Poku";
     } else if (kokemonAleatorio == 2) {
@@ -397,6 +444,16 @@ function pintarCanvas() {
     zaruboEnemigo.pintarKokemon();
     manilaEnemigo.pintarKokemon();
 
+    if (kokemonJugador.velocidadX !== 0 || kokemonJugador.velocidadY !== 0) {
+        revisarColision(pokuEnemigo)
+        revisarColision(naguloEnemigo)
+        revisarColision(zaruboEnemigo)
+        revisarColision(v2Enemigo)
+        revisarColision(ichiteEnemigo)
+        revisarColision(manilaEnemigo)
+
+    }
+
 }
 
 function moverDerecha() {
@@ -450,6 +507,37 @@ function iniciarMapa() {
  */    intervalo = setInterval(pintarCanvas, 50)
     window.addEventListener('keydown', moverConTecla)
     window.addEventListener('keyup',detenerMovimiento)
+}
+
+function revisarColision(enemigo) {
+    const arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+    const izquierdaEnemigo = enemigo.x
+
+    const arribaMascota = 
+        kokemonJugador.y
+    const abajoMascota = 
+        kokemonJugador.y + kokemonJugador.alto
+    const derechaMascota = 
+        kokemonJugador.x + kokemonJugador.ancho
+    const izquierdaMascota = 
+        kokemonJugador.x
+
+    if(
+        abajoMascota < arribaEnemigo ||
+        arribaMascota > abajoEnemigo ||
+        derechaMascota < izquierdaEnemigo ||
+        izquierdaMascota > derechaEnemigo
+    ) {
+        return
+    }
+
+    detenerMovimiento()
+    alert("Combate contra " + enemigo.nombre)
+    sectionAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'none'
+    seleccionarKokemonEnemigo(enemigo)
 }
 
 /* function obtenerObjeto() {
